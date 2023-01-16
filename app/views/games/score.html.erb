@@ -1,32 +1,23 @@
-<h1>Result</h1>
+<div class="container mt-5">
+  <h1>Result</h1>
 
-<%# 1. See if the original letters array came posted with the form  %>
-<p>This should show an array of the original letters: <BR>
-<%= @randomwordletters %>
-</p>
+  <%# 1. Check if the original letters array came posted with the form  %>
+  <p>These are the letters you were given: <BR>
+  <% @randomwordletters.each do |letter| %>
+  <p class="badge bg-primary mx-1"><%= letter.capitalize %></p>
+  <% end %>
+  </p>
 
-<%# 2. See if the word input of the user came posted with the form %>
-<p>This should show an array of letters in the original word: <BR>
-<%# <%= userletters = @word.split("") %>
-<%= @userwordletters %>
-</p>
+  <%# The word can’t be built out of the original grid %>
+  <%# The word is valid according to the grid, but is not a valid English word %>
+  <%# The word is valid according to the grid and is an English word %>
+  <% if @build == false %>
+  <%= "Sorry, but #{@word.upcase} can't be build out of the above letters." %>
+  <% else %>
+    <%= "Congratulations, #{@word} is possible!" if @dictionary["found"] == true %>
+    <%= "Sorry, #{@word} is not in the dictionary." if @dictionary["found"] == false %>
+  <% end %>
 
-<%# The word can’t be built out of the original grid %>
-<%# 3. Iterate over the inputted word and save every letter in a new array? %>
-<%# 4. Check if the randomresult array contains the letters of the inputarray by interating? %>
-<%# <%= @returnletters %>
-<% @userwordletters.each do |letter| %>
-  <% test = @randomwordletters.include?(letter) %>
-  <% if test == false %>
-  <%= "Sorry but #{@word} can't be build out of #{@randomletters}" %>
-<% break %>
-<% end %>
-<% end %>
-
-
-<%# The word is valid according to the grid, but is not a valid English word %>
-
-<%# The word is valid according to the grid and is an English word %>
-
-<%# At the bottom of the results, add a link_to to go back to the New game page. %>
-<BR><%= link_to 'Go back', new_path %>
+  <%# At the bottom of the results, add a link_to to go back to the New game page. %>
+  <BR><%= link_to 'Go back and try again', new_path %>
+</div>
