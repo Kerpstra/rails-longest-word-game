@@ -1,0 +1,32 @@
+<h1>Result</h1>
+
+<%# 1. See if the original letters array came posted with the form  %>
+<p>This should show an array of the original letters: <BR>
+<%= @randomwordletters %>
+</p>
+
+<%# 2. See if the word input of the user came posted with the form %>
+<p>This should show an array of letters in the original word: <BR>
+<%# <%= userletters = @word.split("") %>
+<%= @userwordletters %>
+</p>
+
+<%# The word can’t be built out of the original grid %>
+<%# 3. Iterate over the inputted word and save every letter in a new array? %>
+<%# 4. Check if the randomresult array contains the letters of the inputarray by interating? %>
+<%# <%= @returnletters %>
+<% @userwordletters.each do |letter| %>
+  <% test = @randomwordletters.include?(letter) %>
+  <% if test == false %>
+  <%= "Sorry but #{@word} can't be build out of #{@randomletters}" %>
+<% break %>
+<% end %>
+<% end %>
+
+
+<%# The word is valid according to the grid, but is not a valid English word %>
+
+<%# The word is valid according to the grid and is an English word %>
+
+<%# At the bottom of the results, add a link_to to go back to the New game page. %>
+<BR><%= link_to 'Go back', new_path %>
